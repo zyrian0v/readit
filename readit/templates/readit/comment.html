@@ -1,0 +1,18 @@
+<div class="comment {% if comment.parent %} indent {% endif %}">
+        <a href="{% url 'profile' comment.user %}">{{ comment.user }}</a>
+        <a href="#" data-comment="{{ comment.id }}" class="reply">reply</a>
+        <br>
+        {{ comment.content }}
+
+        <form id="reply_{{ comment.id }}" class="reply-form" action="{% url 'new_comment' post.board.name post.id %}" method="post">
+                {% csrf_token %}
+
+                <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                <textarea name="comment"></textarea>
+                <button>submit</button>
+        </form>
+
+        {% for comment in comment.comment_set.all %}
+                {% include "readit/comment.html" %}
+        {% endfor %}
+</div>

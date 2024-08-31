@@ -1,0 +1,32 @@
+{% extends "readit/base.html" %}
+
+{% block content %}
+        <h3>
+                {% if post.url %}
+                        <a href="{{ post.url }}">{{ post.title }}</a>
+                {% else %}
+                        {{ post.title }}
+                {% endif %}
+        </h3>
+
+        <small>Created by <a href="{% url 'profile' post.user %}">{{ post.user }}</a></small>
+
+        <p>{{ post.description|linebreaks }}</p>
+
+        <form action="{% url 'new_comment' post.board.name post.id %}" method="post">
+                {% csrf_token %}
+
+                <p>
+                        <label for="comment">Comment:</label>
+                        <textarea cols="40" rows="10" name="comment" id="comment"></textarea><br>
+                </p>
+
+                <input type="submit" value="add comment">
+        </form>
+
+        <div class="comment-list">
+                {% for comment in comments %}
+                        {% include "readit/comment.html" %}
+                {% endfor %}
+        </div>
+{% endblock %}

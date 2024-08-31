@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Readit</title>
+        <link rel="stylesheet" href="{% static 'readit/style.css' %}">
+</head>
+<body>
+        <header>
+                <div>
+                        <a href="{% url 'index' %}">readit</a>
+                        {% if user.is_authenticated %}
+                                <a href="{% url 'profile' user.username %}">{{ user.username }}</a>
+
+                                <form class="logout" action="{% url 'logout' %}" method="post">
+                                        {% csrf_token %}
+                                        <button>logout</button>
+                                </form>
+                                
+                        {% else %}
+                                <a href="{% url 'login' %}">log in</a>
+                                <a href="{% url 'register' %}">register</a>
+                        {% endif %}
+                </div>
+
+                <div>
+                        {% if board %}
+                                <a href="{% url 'new_post' board.name %}">new post</a>
+                        {% endif %}
+                </div>
+                <div>
+                        {% for board in boards %}
+                                <a href="{% url 'board' board.name %}">{{ board.name }}</a>
+                        {% endfor %}
+                </div>
+        </header>
+
+        <main>
+                {% block content %}
+                no content
+                {% endblock %}
+        </main>
+
+        <script src="{% static 'readit/reply.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+.logout {
+        display: inline;
+}
+
+form label {
+        display: block;
+}
+
+.comment-list {
+        margin-top: 2rem;
+}
+
+.indent {
+        margin-left: 3rem;
+}
+
+.comment {
+        margin-bottom: 1rem;
+}
+
+.reply {
+        font-size: 0.7rem;
+        margin-left: 0.5rem;
+}
+
+.reply-form {
+        display: none;
+}
+
+header {
+        display: flex;
+        justify-content: space-between;
+}

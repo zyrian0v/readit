@@ -1,0 +1,17 @@
+{% for post in posts %}
+        <p>
+                <span>{{ forloop.counter }}</span>
+                {% if post.url %}
+                        <a href="{{ post.url }}">{{ post.title }}</a>
+                {% else %}
+                        <a href="{% url 'post' post.board.name post.id %}">{{ post.title }}</a>
+                {% endif %}
+                <a href="{% url 'post' post.board.name post.id %}">
+                        {{ post.comment_set.all.count }} Comments
+                </a>
+                <br>
+                <small>
+                        <a href="{% url 'profile' post.user %}">{{ post.user }}</a>
+                </small>
+        </p>
+{% endfor %}
