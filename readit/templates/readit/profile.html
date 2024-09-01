@@ -25,6 +25,8 @@
                                 </form>
                         {% endif %}
                         <br>
+                {% empty %}
+                <p>You have not posted yet.</p>
                 {% endfor %}
 
                 <h4>Comments:</h4>
@@ -39,6 +41,8 @@
                                 {% endif %}
                                 <br>{{ comment.content }}
                         </div>
+                {% empty %}
+                <p>You have not commented on anything.</p>
                 {% endfor %}
         </div>
 {% endblock %}
