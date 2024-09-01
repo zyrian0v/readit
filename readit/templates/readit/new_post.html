@@ -1,6 +1,7 @@
 {% extends "readit/base.html" %}
 
 {% block content %}
+        <p>This will be posted in '{{ board_name }}'.</p>
 
         <form action="" method="post">
                 {% csrf_token %}

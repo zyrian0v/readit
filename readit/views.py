@@ -49,6 +49,7 @@ def new_post(request, board_name):
         form = PostForm()
         return render(request, "readit/new_post.html", {
                 "form": form,
+                "board_name": board_name,
         })
 
 def new_comment(request, board_name, post_id):
@@ -68,10 +69,12 @@ def profile(request, username):
         profile = get_object_or_404(User, username=username)
         posts = profile.post_set.all()
         comments = profile.comment_set.all()
+        is_you = request.user == profile
         return render(request, "readit/profile.html", {
                 "profile": profile,
                 "posts": posts,
                 "comments": comments,
+                "is_you": is_you,
         })
 
 def register(request):
@@ -99,3 +102,17 @@ def register(request):
         return render(request, "readit/register.html", {
                 "form": form,
         })
+
+def delete_post(request, board_name, post_id):
+        if request.method == "POST":
+                post = Post.objects.get(id=post_id)
+                if request.user == post.user:
+                        post.delete()
+        return redirect("profile", username=request.user.username)
+
+def delete_comment(request, comment_id):
+        if request.method == "POST":
+                comment = Comment.objects.get(id=comment_id)
+                if request.user == comment.user:
+                        comment.delete()
+        return redirect("profile", username=request.user.username)

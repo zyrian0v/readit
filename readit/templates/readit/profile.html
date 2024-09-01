@@ -2,7 +2,14 @@
 
 {% block content %}
         <div>
-                <h3>{{ profile.username }}</h3>
+                <h3>
+                        {{ profile.username }}
+
+                        {% if is_you %}
+                                (you)
+                        {% endif %}
+                </h3>
+
                 
                 <h4>Posts:</h4>
 
@@ -10,15 +17,28 @@
                         <a href="{{ post.url }}">{{ post.title }}</a>
                         <a href="{% url 'post' post.board.name post.id %}">
                                 {{ post.comment_set.all.count }} Comments
-                        </a><br>
+                        </a>
+                        {% if is_you %}
+                                <form class="delete-post" action="{% url 'delete_post' post.board post.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button>delete</button>
+                                </form>
+                        {% endif %}
+                        <br>
                 {% endfor %}
 
                 <h4>Comments:</h4>
                 {% for comment in comments %}
-                        <p>
+                        <div class="comment">
                                 <a href="{% url 'post' comment.post.board.name comment.post.id %}">{{ comment.post.title }}</a>
+                                {% if is_you %}
+                                        <form class="delete-comment" action="{% url 'delete_comment' comment.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button>delete</button>
+                                        </form>
+                                {% endif %}
                                 <br>{{ comment.content }}
-                        </p>
+                        </div>
                 {% endfor %}
         </div>
 {% endblock %}

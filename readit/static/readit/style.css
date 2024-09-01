@@ -1,3 +1,8 @@
+html {
+        font-size: 1.1rem;
+        font-family: sans-serif;
+}
+
 .logout {
         display: inline;
 }
@@ -22,6 +27,25 @@ form label {
         font-size: 0.7rem;
         margin-left: 0.5rem;
 }
+
+.delete-post {
+        display: inline-block;
+        margin-left: 0.5rem;
+}
+
+.delete-post, button {
+        font-size: 0.7rem;
+}
+
+.delete-comment {
+        display: inline-block;
+        margin-left: 0.5rem;
+}
+
+.delete-comment, button {
+        font-size: 0.7rem;
+}
+
 
 .reply-form {
         display: none;
