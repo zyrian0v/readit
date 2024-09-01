@@ -3,5 +3,7 @@
 {% block content %}
         <h3>{{ board.title }}</h3>
 
-        {% include 'readit/post_list.html' %}
+        {% for post in posts %}
+                {% include 'readit/post_partial.html' %}
+        {% endfor %}
 {% endblock %}

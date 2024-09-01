@@ -1,5 +1,4 @@
 html {
-        font-size: 1.1rem;
         font-family: sans-serif;
 }
 
@@ -38,7 +37,7 @@ form label {
         margin-left: 0.5rem;
 }
 
-.delete-post, button {
+.delete-post button {
         font-size: 0.7rem;
 }
 
@@ -47,7 +46,7 @@ form label {
         margin-left: 0.5rem;
 }
 
-.delete-comment, button {
+.delete-comment button {
         font-size: 0.7rem;
 }
 
@@ -81,4 +80,9 @@ form label {
 
 .small {
         font-size: 0.7rem;
+}
+
+.post-header{
+        display: flex;
+        align-items: center;
 }
