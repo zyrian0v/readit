@@ -1,7 +1,7 @@
 {% extends "readit/base.html" %}
 
 {% block content %}
-        <div>
+        <div class="profile">
                 <h3>
                         {{ profile.username }}
 
@@ -10,7 +10,6 @@
                         {% endif %}
                 </h3>
 
-                
                 <h4>Posts:</h4>
 
                 {% for post in posts %}

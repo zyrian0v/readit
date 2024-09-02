@@ -69,6 +69,14 @@ form label {
         margin: 0 auto;
 }
 
+.votes a.upvote.done {
+        color: red;
+}
+
+.votes a.downvote.done {
+        color: blue;
+}
+
 .post {
         margin: 1rem 0;
         display: flex;
@@ -82,7 +90,7 @@ form label {
         font-size: 0.7rem;
 }
 
-.post-header{
+.post-header {
         display: flex;
         align-items: center;
 }

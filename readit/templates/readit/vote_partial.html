@@ -1,0 +1,5 @@
+<div class="votes">
+        <a data-url="{% url 'upvote' post.id %}" class="upvote" href="#">⯅</a>
+        <div class="vote-count">{{ post.votes }}</div>
+        <a data-url="{% url 'downvote' post.id %}" class="downvote" href="#">⯆</a>
+</div>

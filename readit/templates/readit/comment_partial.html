@@ -13,6 +13,6 @@
         </form>
 
         {% for comment in comment.comment_set.all %}
-                {% include "readit/comment.html" %}
+                {% include "readit/comment_partial.html" %}
         {% endfor %}
 </div>

@@ -1,9 +1,10 @@
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, Comment, Board
+from .models import Post, Comment, Board, Vote
 from .forms import PostForm, RegistrationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.http import HttpResponse
 
 def index(request):
         posts = Post.objects.all()
@@ -116,3 +117,32 @@ def delete_comment(request, comment_id):
                 if request.user == comment.user:
                         comment.delete()
         return redirect("profile", username=request.user.username)
+
+def upvote(request, post_id):
+        if request.method == "POST":
+                vote = Vote.objects.filter(post_id=post_id, user=request.user).first()
+                if not vote:
+                        post = Post.objects.get(id=post_id)
+                        post.votes += 1
+                        post.save()
+                        new_vote = Vote(post_id=post_id, user=request.user, vote=Vote.DOWNVOTE)
+                        new_vote.save()
+                        return HttpResponse("upvoted in django")
+                else:
+                        return HttpResponse("already voted")
+        return HttpResponse("wrong method")
+        
+def downvote(request, post_id):
+        if request.method == "POST":
+                vote = Vote.objects.filter(post_id=post_id, user=request.user).first()
+                if not vote:
+                        post = Post.objects.get(id=post_id)
+                        post.votes -= 1
+                        post.save()
+                        new_vote = Vote(post_id=post_id, user=request.user, vote=Vote.DOWNVOTE)
+                        new_vote.save()
+                        return HttpResponse("downvoted in django")
+                else:
+                        return HttpResponse("already voted")
+        return HttpResponse("wrong method")
+        

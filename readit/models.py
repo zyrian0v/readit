@@ -28,3 +28,16 @@ class Comment(models.Model):
         def __str__(self):
                 return f"({self.post.title}) {self.content}"
 
+class Vote(models.Model):
+        user = models.ForeignKey(User, on_delete=models.CASCADE)
+        post = models.ForeignKey(Post, on_delete=models.CASCADE)
+        UPVOTE = "UP"
+        DOWNVOTE = "DOWN"
+        VOTE_CHOICES = {
+                UPVOTE: "Upvote",
+                DOWNVOTE: "Downvote",
+        }
+        vote = models.CharField(max_length=4, choices=VOTE_CHOICES, default=UPVOTE)
+
+        def __str__(self):
+                return f"{self.user} - {self.post.title} - {self.get_vote_display()}"

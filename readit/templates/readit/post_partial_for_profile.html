@@ -1,10 +1,7 @@
 <div class="post">
         <!-- <span>{{ forloop.counter }}</span> -->
-        <div class="votes">
-                <a class="upvote" href="#">⯅</a>
-                <div>{{ post.votes }}</div>
-                <a class="downvote" href="#">⯆</a>
-        </div>
+        {% include "readit/vote_partial.html" %}
+
         <div>
                 {% if post.url %}
                         <a href="{{ post.url }}">{{ post.title }}</a>
@@ -24,7 +21,6 @@
 
                 <div class="small">
                         <a href="{% url 'profile' post.user %}">{{ post.user }}</a>
-
                 </div>
         </div>
 </div>
